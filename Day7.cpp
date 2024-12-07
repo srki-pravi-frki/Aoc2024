@@ -12,7 +12,7 @@
 
 using namespace std;
 
-// Recursion baby!
+// Recursion baby! Slow but it works!
 
 
 vector<string> split(string s, string delimiter) {
@@ -38,7 +38,7 @@ long concatenate(long a, long b)
 bool operatorsAndConcat(long result, vector<long> numbers, int index, long current = 0ULL)
 {
     if (index == numbers.size())
-        return result == current;
+        return result == current;  // only return TRUE if we reached the end of the list, and the result is valid
 
     if (current > result || current < 0)
         return false;
@@ -51,7 +51,7 @@ bool operatorsAndConcat(long result, vector<long> numbers, int index, long curre
 bool operators(long result, vector<long> numbers, long index,
                long current = 0ULL) {
   if (index == numbers.size())
-    return result == current;
+    return result == current; // only return TRUE if we reached the end of the list, and the result is valid
 
   if (current > result)
     return false;
@@ -86,7 +86,7 @@ int main() {
   std::ifstream ifile("Day7.txt");
 
   vector<vector<long>> lines;
-  vector<pair<long, vector<long>>> data;
+  vector<pair<long, vector<long>>> inputData;
 
   if (ifile.is_open()) {
 
@@ -95,13 +95,13 @@ int main() {
       vector<string> parts = split(line, " ");
       vector<long> values;
       for (long i = 1; i < parts.size(); i++)
-        values.push_back(stoll(parts[i]));
-      data.push_back({stoll(parts[0]), values});
+        values.push_back(stol(parts[i]));
+      inputData.push_back({stol(parts[0]), values}); // Ugly
     }
   }
 
-  cout << "First part is: " << processPartOne(data) << endl;
-  cout << "Second part is: " << processPartTwo(data) << endl;
+  cout << "First part is: " << processPartOne(inputData) << endl;
+  cout << "Second part is: " << processPartTwo(inputData) << endl;
 
   return 0;
 }
